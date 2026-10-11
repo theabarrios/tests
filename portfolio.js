@@ -1,6 +1,6 @@
 <script>
   const button=getElementById("myButton");
   document.addEventListener("click", function() {
-    window.location.href = "https://github.com/theabarrios/tests/app";
+    window.location.href = "https://github.com/theabarrios/tests/app/app.html";
   });
 </script>
