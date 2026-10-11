@@ -1,5 +1,3 @@
-<script>
-
 const api_url ="https://zenquotes.io/api/random/";
 
 async function getQuote(url) {
@@ -26,4 +24,4 @@ const button1 = document.getElementById("quote-button");
   button2.addEventListener("click", function(){
     window.location.href = "portfolio link";
   });*/
-</script>
+
