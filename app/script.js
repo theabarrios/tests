@@ -4,10 +4,10 @@ async function getQuote(url) {
   try{
     const response = await fetch(url);
     if(!response.ok){
-      Throw new Error("Failed to Load Quote, Please try again.");
+      throw new Error("Failed to Load Quote, Please try again.");
     }
     var data = await response.json();
-    document.getElementById("quoteBody").innerHTML= data.h;
+    document.getElementById("quoteBody").innerHTML= data[0].h;
   }catch(error){
     document.getElementById("quoteBody").innerText= error.message;
   }
@@ -16,7 +16,7 @@ async function getQuote(url) {
 const button1 = document.getElementById("quote-button");
 
   button1.addEventListener("click", function() {
-      getQoute(api_url);
+      getQuote(api_url);
   });
 
 /*const button2 = document.getElementById("portfolio-button");
