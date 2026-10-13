@@ -1,5 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const button = document.getElementById("quote-button");
+  const button1 = document.getElementById("quote-button");
+  const button2 = document.getElementById("portfolio-button");
   const quoteBody = document.getElementById("quoteBody");
 
   async function updateQuote() {
@@ -15,5 +16,9 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  button.addEventListener("click", updateQuote);
+  button1.addEventListener("click", updateQuote);
+  
+  button2.addEventListener("click", function(){
+    window.location.href = "portfolio link";
+  });
 });
