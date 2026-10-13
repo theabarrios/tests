@@ -6,13 +6,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
   async function updateQuote() {
     try {
-      const response = await fetch("https://quoteslate.vercel.app/api/quotes/random");
+      const response = await fetch("https://stoic.tekloon.net/stoic-quote");
       if (!response.ok) {
         throw new Error("Failed to load quote, please try again.");
       }
       const data = await response.json();
-      quoteBody.innerText = `"${data.quote}"`;
-      author.innerText = `—${data.author}`;
+      quoteBody.innerText = `"${data.data.quote}"`;
+      author.innerText = `—${data.data.author}`;
     } catch (error) {
       quoteBody.textContent = error.message;
     }
