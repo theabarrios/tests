@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   async function updateQuote() {
     try {
-      const response = await fetch("https://theysaidso.com/api/quotes/random");
+      const response = await fetch("https://quoteslate.vercel.app/api/quotes/random");
       if (!response.ok) {
         throw new Error("Failed to load quote, please try again.");
       }
