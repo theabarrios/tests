@@ -6,20 +6,21 @@ document.addEventListener("DOMContentLoaded", () => {
 
   async function updateQuote() {
     try {
-      const response = await fetch("https://zenquotes.io/api/quotes/random");
+      const response = await fetch("https://dummyjson.com/quotes/random");
+      const response = await fetch("https://theysaidso.com/api/quotes/random");
       if (!response.ok) {
         throw new Error("Failed to load quote, please try again.");
       }
       const data = await response.json();
-      quoteBody.innerText = `"${data.q}"`;
-      author.innerText = `—${data.a}`;
+      quoteBody.innerText = `"${data.quote}"`;
+      author.innerText = `—${data.author}`;
     } catch (error) {
       quoteBody.textContent = error.message;
     }
   }
 
   button1.addEventListener("click", updateQuote);
-  
+
   button2.addEventListener("click", function(){
     window.location.href = "https://theabarrios.github.io/tests/";
   });
