@@ -6,13 +6,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
   async function updateQuote() {
     try {
-      const response = await fetch("https://theysaidso.com/api/quotes/random");
+      const response = await fetch("https://zenquotes.io/api/quotes/random");
       if (!response.ok) {
         throw new Error("Failed to load quote, please try again.");
       }
       const data = await response.json();
-      quoteBody.innerText = `"${data.quote}"`;
-      author.innerText = `—${data.author}`;
+      quoteBody.innerText = `"${data.q}"`;
+      author.innerText = `—${data.a}`;
     } catch (error) {
       quoteBody.textContent = error.message;
     }
