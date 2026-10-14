@@ -4,14 +4,11 @@ document.addEventListener("DOMContentLoaded", () => {
   const quoteBody = document.getElementById("quote");
   const author = document.getElementById("quoteAuthor");
 
-  const API_URL = "https://quoteslate.vercel.app/api/quotes/random?count=50";
-  const CACHE_KEY = "quoteCache";
-
   async function getQuote() {
-    let cache = JSON.parse(localStorage.getItem(CACHE_KEY)) || [];
+    let cache = JSON.parse(localStorage.getItem("quoteCache")) || [];
 
     if (cache.length === 0) {
-      const response = await fetch(API_URL);
+      const response = await fetch("https://quoteslate.vercel.app/api/quotes/random?count=50");
       if (!response.ok) {
         throw new Error("Failed to load quotes, please try again.");
       }
@@ -20,7 +17,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const pick = cache.shift();
 
-    localStorage.setItem(CACHE_KEY, JSON.stringify(cache));
+    localStorage.setItem("quoteCache", JSON.stringify(cache));
     return pick;
   }
 
@@ -31,7 +28,11 @@ document.addEventListener("DOMContentLoaded", () => {
       author.textContent = `—${q.author}`;
     } catch (error) {
       console.error(error);
-      quoteBody.textContent = "Something went wrong. Please try again.";
+      if (error instanceof TypeError) {
+        quoteBody.textContent = "Connection problem. Please check your internet and try again.";
+      } else {
+        quoteBody.textContent = error.message;
+      }
       author.textContent = "";
     }
   }
