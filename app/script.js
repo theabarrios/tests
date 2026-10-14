@@ -4,23 +4,41 @@ document.addEventListener("DOMContentLoaded", () => {
   const quoteBody = document.getElementById("quote");
   const author = document.getElementById("quoteAuthor");
 
+  const API_URL = "https://quoteslate.vercel.app/api/quotes/random?count=50";
+  const CACHE_KEY = "quoteCache";
+
+  async function getQuote() {
+    let cache = JSON.parse(localStorage.getItem(CACHE_KEY)) || [];
+
+    if (cache.length === 0) {
+      const response = await fetch(API_URL);
+      if (!response.ok) {
+        throw new Error("Failed to load quotes, please try again.");
+      }
+      cache = await response.json();
+    }
+
+    const pick = cache.shift();
+
+    localStorage.setItem(CACHE_KEY, JSON.stringify(cache));
+    return pick;
+  }
+
   async function updateQuote() {
     try {
-      const response = await fetch("https://stoic.tekloon.net/stoic-quote");
-      if (!response.ok) {
-        throw new Error("Failed to load quote, please try again.");
-      }
-      const data = await response.json();
-      quoteBody.innerText = `"${data.data.quote}"`;
-      author.innerText = `—${data.data.author}`;
+      const q = await getQuote();
+      quoteBody.textContent = `"${q.quote}"`;
+      author.textContent = `—${q.author}`;
     } catch (error) {
-      quoteBody.textContent = error.message;
+      console.error(error);
+      quoteBody.textContent = "Something went wrong. Please try again.";
+      author.textContent = "";
     }
   }
 
   button1.addEventListener("click", updateQuote);
 
-  button2.addEventListener("click", function(){
+  button2.addEventListener("click", function () {
     window.location.href = "https://theabarrios.github.io/tests/";
   });
 });
